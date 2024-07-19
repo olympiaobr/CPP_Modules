@@ -63,37 +63,41 @@ void PhoneBook::findContact() const
               << std::setw(20) << "First Name" << "|"
               << std::setw(20) << "Last Name" << "|"
               << std::setw(20) << "Nickname" << std::endl;
-    for (int i = 0; i < std::min(contactCount, 8); ++i)
+    for (int i = 0; i < contactCount; ++i)
     {
         std::cout << std::setw(10) << i << "|"
                   << std::setw(20) << contacts[i].getFName() << "|"
                   << std::setw(20) << contacts[i].getLName() << "|"
                   << std::setw(20) << contacts[i].getNickn() << std::endl;
     }
-    while (true)
+    bool validInput = false;
+    while (!validInput)
     {
         int index;
-        std::cout << "Please enter the index of the contact you want to display: ";
+        std::cout << "Enter the index of the contact to display: ";
         std::cin >> index;
-        if (std::cin.fail() || index < 0 || index >= std::min(contactCount, 8))
+
+        if (std::cin.fail() || index < 0 || index >= contactCount)
         {
-            std::cin.clear();
+            std::cin.clear(); // Clear the error flag
             std::cin.ignore(std::numeric_limits<std::streamsize>::max(), '\n');
-            std::cout << "Invalid index! It must be between 0 and " << std::min(contactCount, 8) - 1 << std::endl;
+            std::cout << "Invalid index! Please enter a valid index between 0 and " << contactCount - 1 << "." << std::endl;
         }
         else
         {
+            validInput = true;
             std::cin.ignore(std::numeric_limits<std::streamsize>::max(), '\n');
+
             std::cout << "First Name: " << contacts[index].getFName() << std::endl;
             std::cout << "Last Name: " << contacts[index].getLName() << std::endl;
             std::cout << "Nickname: " << contacts[index].getNickn() << std::endl;
             std::cout << "Phone Number: " << contacts[index].getPhoneNumber() << std::endl;
             std::cout << "Darkest Secret: " << contacts[index].getDarkestSecret() << std::endl;
             std::cout << "*************************************************" << std::endl;
-            std::cout << "Press Enter to return to the menu.";
-            std::cin.ignore(std::numeric_limits<std::streamsize>::max(), '\n');
-            return;
         }
     }
+
+    std::cout << "Press Enter to return to the menu.";
+    std::cin.ignore(std::numeric_limits<std::streamsize>::max(), '\n');
 }
 

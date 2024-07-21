@@ -13,15 +13,15 @@ int Account::_totalNbWithdrawals = 0;
 
 Account::Account(int deposit)
 {
-    _accountIndex = _nbAccounts; // Assign current number of accounts to _accountIndex
-    _amount = deposit; // Set initial amount
-    _nbDeposits = 0; // Initialize number of deposits to 0
-    _nbWithdrawals = 0; // Initialize number of withdrawals to 0
+    _accountIndex = _nbAccounts;
+    _amount = deposit;
+    _nbDeposits = 0;
+    _nbWithdrawals = 0;
 
-    _nbAccounts++; // Increment the number of accounts
-    _totalAmount += _amount; // Add the initial amount to the total amount
+    _nbAccounts++;
+    _totalAmount += _amount;
 
-    _displayTimestamp(); // Display the timestamp
+    _displayTimestamp();
     std::cout << "index:" << _accountIndex << ";amount:" << _amount << ";created" << std::endl;
 }
 

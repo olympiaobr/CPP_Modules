@@ -1,6 +1,5 @@
 #include <iostream>
 #include <cctype>
-#include <string>
 
 int main(int argc, char* argv[])
 {
@@ -9,7 +8,7 @@ int main(int argc, char* argv[])
         std::cout << "* LOUD AND UNBEARABLE FEEDBACK NOISE *" << std::endl;
     }
 	else
-     {
+    {
         for (int i = 1; i < argc; ++i)
         {
             for (char* p = argv[i]; *p != '\0'; ++p)

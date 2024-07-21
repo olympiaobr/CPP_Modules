@@ -2,7 +2,8 @@
 #include <string>
 #include "PhoneBook.hpp"
 
-int main() {
+int main()
+{
 
     PhoneBook phoneBook;
     std::string command;

@@ -79,7 +79,7 @@ void PhoneBook::findContact() const
 
         if (std::cin.fail() || index < 0 || index >= contactCount)
         {
-            std::cin.clear(); // Clear the error flag
+            std::cin.clear();
             std::cin.ignore(std::numeric_limits<std::streamsize>::max(), '\n');
             std::cout << "Invalid index! Please enter a valid index between 0 and " << contactCount - 1 << "." << std::endl;
         }
@@ -96,7 +96,6 @@ void PhoneBook::findContact() const
             std::cout << "*************************************************" << std::endl;
         }
     }
-
     std::cout << "Press Enter to return to the menu.";
     std::cin.ignore(std::numeric_limits<std::streamsize>::max(), '\n');
 }

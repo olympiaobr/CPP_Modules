@@ -7,16 +7,16 @@ class Fixed
 {
 public:
     Fixed();
-    Fixed(const int value);                 // Integer constructor
-    Fixed(const float value);               // Float constructor
+    Fixed(const int value);
+    Fixed(const float value);
     Fixed(const Fixed& other);
     Fixed& operator=(const Fixed& other);
     ~Fixed();
 
     int getRawBits(void) const;
     void setRawBits(int const raw);
-    float toFloat(void) const;              // Convert to float
-    int toInt(void) const;                  // Convert to int
+    float toFloat(void) const;
+    int toInt(void) const;
 
 	private:
     int fixedPointValue;

@@ -5,13 +5,13 @@ class Fixed
 {
 public:
     Fixed();
-    Fixed(const Fixed& other);              // Copy constructor
-    Fixed& operator=(const Fixed& other);   // Copy assignment operator
+    Fixed(const Fixed& other);              // copy constructor
+    Fixed& operator=(const Fixed& other);   // copy assignment operator
     ~Fixed();
 
     int getRawBits(void) const;
     void setRawBits(int const raw);
-	
+
 private:
     int fixedPointValue;
     static const int fractionalBits = 8;

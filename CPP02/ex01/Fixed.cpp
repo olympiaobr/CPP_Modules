@@ -56,8 +56,9 @@ float Fixed::toFloat(void) const
     return static_cast<float>(fixedPointValue) / (1 << fractionalBits);
 }
 
-int Fixed::toInt(void) const {
-	
+int Fixed::toInt(void) const
+{
+
     return fixedPointValue >> fractionalBits;
 }
 

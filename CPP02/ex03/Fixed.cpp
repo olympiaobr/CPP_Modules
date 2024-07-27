@@ -1,9 +1,6 @@
 #include "Fixed.hpp"
 #include <cmath>
 
-#include "Fixed.hpp"
-#include <cmath>
-
 Fixed::Fixed() : fixedPointValue(0) {}
 
 Fixed::Fixed(const int value) : fixedPointValue(value << fractionalBits) {}

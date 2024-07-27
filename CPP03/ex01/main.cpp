@@ -2,70 +2,52 @@
 #include "ScavTrap.hpp"
 #include "ClapTrap.hpp"
 
-#include <iostream>
-#include "ScavTrap.hpp"
-#include "ClapTrap.hpp"
-
 int main()
 {
     std::cout << "Creating characters...\n";
-    ClapTrap clap("Clapper");
-    ScavTrap scav("Guardian");
-    ScavTrap scav2("Watcher");
+    ClapTrap homelander("Homelander");
+    ScavTrap starlight("Starlight");
+    ScavTrap destroyer("Destroyer");
 
-    clap.setAttackDamage(10);
-    scav.setAttackDamage(15);
-    scav2.setAttackDamage(20);
+    homelander.setAttackDamage(10);
+    starlight.setAttackDamage(15);
+    destroyer.setAttackDamage(20);
 
-    std::cout << "\nGuardian enters Guard Gate mode.\n";
-    scav.guardGate();
-    std::cout << "Watcher enters Guard Gate mode.\n";
-    scav2.guardGate();
+    std::cout << "Starlight and Destroyer enter Guard Gate mode.\n";
+    starlight.guardGate();
+    destroyer.guardGate();
 
     std::cout << "\nSimulating battle interactions...\n";
-    for (int round = 0; round < 3; round++)
-	{
-        std::cout << "--------------------------------------------------------------------\n";
-        std::cout << scav.getName() << " Energy: " << scav.getEnergyPoints() << std::endl;
-        std::cout << clap.getName() << " Energy: " << clap.getEnergyPoints() << std::endl;
-        std::cout << scav2.getName() << " Energy: " << scav2.getEnergyPoints() << std::endl;
-        std::cout << "--------------------------------------------------------------------\n";
+    std::cout << "--------------------------------------------------------------------\n";
+    std::cout << "Starlight - HP: " << starlight.getHitPoints() << ", Energy: " << starlight.getEnergyPoints() << std::endl;
+    std::cout << "Homelander - HP: " << homelander.getHitPoints() << ", Energy: " << homelander.getEnergyPoints() << std::endl;
+    std::cout << "Destroyer - HP: " << destroyer.getHitPoints() << ", Energy: " << destroyer.getEnergyPoints() << std::endl;
+    std::cout << "--------------------------------------------------------------------\n";
 
-        if (clap.getHitPoints() > 0 && clap.getEnergyPoints() > 0)
-		{
-            scav.attack("Clapper");
-            clap.takeDamage(15);
-            clap.beRepaired(10);
-        }
-		else
-		{
-            std::cout << "ClapTrap Clapper is knocked out and cannot participate.\n";
-        }
-        if (scav.getHitPoints() > 0 && scav.getEnergyPoints() > 0)
-		{
-            scav2.attack("Guardian");
-            scav.takeDamage(20);
-            scav.beRepaired(15);
-        }
-		else {
-            std::cout << "ScavTrap Guardian is knocked out and cannot participate.\n";
-        }
-        if (scav2.getHitPoints() > 0 && scav2.getEnergyPoints() > 0)
-		{
-            clap.attack("Watcher");
-            scav2.takeDamage(10);
-            scav2.beRepaired(10);
-        }
-		else
-		{
-            std::cout << "ScavTrap Watcher is knocked out and cannot participate.\n";
-        }
-        if (scav.getEnergyPoints() == 0 || clap.getEnergyPoints() == 0 || scav2.getEnergyPoints() == 0) {
-            std::cout << "\nOne or more characters are out of energy points!\n";
-            break;
-        }
+    if (homelander.getEnergyPoints() > 0)
+	{
+        homelander.attack(starlight.getName());
+        starlight.takeDamage(homelander.getAttackDamage());
     }
+    if (starlight.getEnergyPoints() > 0)
+	{
+        starlight.attack(homelander.getName());
+        homelander.takeDamage(starlight.getAttackDamage());
+    }
+    if (destroyer.getEnergyPoints() > 0)
+	{
+        destroyer.attack(starlight.getName());
+        starlight.takeDamage(destroyer.getAttackDamage());
+    }
+
+    homelander.beRepaired(5);
+    starlight.beRepaired(5);
+    destroyer.beRepaired(5);
+
+    std::cout << homelander.getName() << " - HP: " << homelander.getHitPoints() << ", Energy: " << homelander.getEnergyPoints() << std::endl;
+    std::cout << starlight.getName() << " - HP: " << starlight.getHitPoints() << ", Energy: " << starlight.getEnergyPoints() << std::endl;
+    std::cout << destroyer.getName() << " - HP: " << destroyer.getHitPoints() << ", Energy: " << destroyer.getEnergyPoints() << std::endl;
+
     std::cout << "\nDestruction sequence initiated...\n";
     return 0;
 }
-

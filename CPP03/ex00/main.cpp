@@ -6,32 +6,44 @@
 
 int main()
 {
-    ClapTrap robotA("Starlight");
-    ClapTrap robotB("Homelander");
+    ClapTrap heroA("Starlight");
+    ClapTrap heroB("Homelander");
 
-    robotA.setAttackDamage(5);
-    robotB.setAttackDamage(3);
+    heroA.setAttackDamage(5);
+    heroB.setAttackDamage(3);
 
-    int rounds = 3;
-    while (rounds-- > 0 && robotA.getEnergyPoints() > 0 && robotB.getEnergyPoints() > 0)
-	{
-        std::cout << "\n--- Round: " << 3 - rounds << " ---" << std::endl;
-        std::cout << robotA.getName() << " attacks " << robotB.getName() << std::endl;
-        robotB.takeDamage(robotA.getAttackDamage());
-        robotB.beRepaired(2);
+    int rounds = 2;
+    std::cout << "\nStarting battle..." << std::endl;
 
-        std::cout << robotB.getName() << " attacks " << robotA.getName() << std::endl;
-        robotA.takeDamage(robotB.getAttackDamage());
-        robotA.beRepaired(2);
+    for (int round = 1; round <= rounds; ++round) {
+        std::cout << "\n--- Round: " << round << " ---" << std::endl;
 
-        std::cout << robotA.getName() << " - HP: " << robotA.getHitPoints() << ", Energy: " << robotA.getEnergyPoints() << std::endl;
-        std::cout << robotB.getName() << " - HP: " << robotB.getHitPoints() << ", Energy: " << robotB.getEnergyPoints() << std::endl;
+        if (heroA.getEnergyPoints() > 0 && heroB.getEnergyPoints() > 0)
+		{
+            std::cout << heroA.getName() << " attacks " << heroB.getName() << std::endl;
+            heroA.attack(heroB.getName());
+            heroB.takeDamage(heroA.getAttackDamage());
+
+            std::cout << heroB.getName() << " attacks " << heroA.getName() << std::endl;
+            heroB.attack(heroA.getName());
+            heroA.takeDamage(heroB.getAttackDamage());
+        }
+        if (heroB.getEnergyPoints() > 0)
+		{
+            heroB.beRepaired(2);
+        }
+        if (heroA.getEnergyPoints() > 0)
+		{
+            heroA.beRepaired(2);
+        }
+        std::cout << heroA.getName() << " - HP: " << heroA.getHitPoints() << ", Energy: " << heroA.getEnergyPoints() << std::endl;
+        std::cout << heroB.getName() << " - HP: " << heroB.getHitPoints() << ", Energy: " << heroB.getEnergyPoints() << std::endl;
     }
-
-    if(robotA.getEnergyPoints() == 0)
-        std::cout << robotA.getName() << " is out of energy points!" << std::endl;
-    if(robotB.getEnergyPoints() == 0)
-        std::cout << robotB.getName() << " is out of energy points!" << std::endl;
+    if (heroA.getEnergyPoints() == 0)
+        std::cout << "\n" << heroA.getName() << " is out of energy points!" << std::endl;
+    if (heroB.getEnergyPoints() == 0)
+        std::cout << heroB.getName() << " is out of energy points!" << std::endl;
+    std::cout << "\nDestruction sequence initiated...\n";
 
     return 0;
 }

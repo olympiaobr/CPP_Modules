@@ -1,4 +1,4 @@
-NAME = claptrap
+NAME = diamond
 CC = c++
 CFLAGS = -Wall -Wextra -Werror -std=c++98
 

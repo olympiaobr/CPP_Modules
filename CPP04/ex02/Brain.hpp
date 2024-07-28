@@ -3,8 +3,7 @@
 
 #include <string>
 
-class Brain
-{
+class Brain {
 public:
     std::string ideas[100];
 

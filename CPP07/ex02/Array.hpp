@@ -11,10 +11,8 @@ private:
     unsigned int _size;
 
 public:
-    // Default constructor: Creates an empty array
     Array() : array(NULL), _size(0) {}
 
-    // Constructor with size n: Creates an array of n elements initialized by default
     Array(unsigned int n) : array(new T[n]()), _size(n) {}
 
     // Copy constructor
@@ -35,12 +33,10 @@ public:
         return *this;
     }
 
-    // Destructor
     ~Array() {
         delete[] array;
     }
 
-    // Subscript operator to access elements with bounds checking
     T& operator[](unsigned int index) {
         if (index >= _size) {
             throw std::out_of_range("Array index out of bounds");
@@ -48,7 +44,6 @@ public:
         return array[index];
     }
 
-    // Const version of subscript operator
     const T& operator[](unsigned int index) const {
         if (index >= _size) {
             throw std::out_of_range("Array index out of bounds");
@@ -56,7 +51,6 @@ public:
         return array[index];
     }
 
-    // Size function to return the number of elements in the array
     unsigned int size() const {
         return _size;
     }

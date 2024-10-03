@@ -8,7 +8,7 @@
 
 // Generate a random Base* which could be A, B, or C
 Base* generate(void) {
-    int random = rand() % 3;  // Random value between 0 and 2
+    int random = rand() % 3;
     switch (random) {
         case 0: return new A();
         case 1: return new B();
@@ -19,10 +19,14 @@ Base* generate(void) {
 
 // Identify using a pointer
 void identify(Base* p) {
-    if (dynamic_cast<A*>(p)) std::cout << "A" << std::endl;
-    else if (dynamic_cast<B*>(p)) std::cout << "B" << std::endl;
-    else if (dynamic_cast<C*>(p)) std::cout << "C" << std::endl;
-    else std::cout << "Unknown type" << std::endl;
+    if (dynamic_cast<A*>(p))
+        std::cout << "A" << std::endl;
+    else if (dynamic_cast<B*>(p))
+        std::cout << "B" << std::endl;
+    else if (dynamic_cast<C*>(p))
+        std::cout << "C" << std::endl;
+    else
+        std::cout << "Unknown type" << std::endl;
 }
 
 // Identify using a reference (no pointer)

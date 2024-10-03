@@ -12,7 +12,6 @@ int main() {
 
     Base* objects[NUM_TESTS];
 
-    // gen multiple objects and identify them
     for (int i = 0; i < NUM_TESTS; ++i) {
         objects[i] = generate();  // Generate a random object
         std::cout << "Object " << i + 1 << " (pointer): ";
@@ -26,7 +25,6 @@ int main() {
         delete objects[i];
     }
 
-    // edge case
     std::cout << "\nTesting null pointer identification:\n";
     Base* nullPtr = NULL;
     identify(nullPtr);

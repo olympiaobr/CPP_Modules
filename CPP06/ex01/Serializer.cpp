@@ -1,11 +1,22 @@
 #include "Serializer.hpp"
 
-// Serialize a pointer to unsigned long
-unsigned long Serializer::serialize(Data* ptr) {
-    return reinterpret_cast<unsigned long>(ptr);
+Serializer::Serializer() {}
+
+Serializer::Serializer(const Serializer &other) {
+    (void)other;
 }
 
-// Deserialize an unsigned long back to a data pointer
-Data* Serializer::deserialize(unsigned long raw) {
+Serializer &Serializer::operator=(const Serializer &other) {
+    (void)other;
+    return *this;
+}
+
+Serializer::~Serializer() {}
+
+uintptr_t Serializer::serialize(Data* ptr) {
+    return reinterpret_cast<uintptr_t>(ptr);
+}
+
+Data* Serializer::deserialize(uintptr_t raw) {
     return reinterpret_cast<Data*>(raw);
 }

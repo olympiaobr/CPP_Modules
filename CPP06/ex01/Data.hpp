@@ -3,16 +3,11 @@
 
 #include <string>
 
-class Data {
-public:
+struct Data {
     int id;
     std::string name;
-
-    Data();
-    Data(const Data &other);
-    Data &operator=(const Data &other);
-    ~Data();
 };
 
 #endif
+
 

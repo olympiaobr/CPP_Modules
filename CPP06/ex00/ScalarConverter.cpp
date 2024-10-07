@@ -6,6 +6,16 @@
 #include <cmath>
 #include <limits>
 
+ScalarConverter::ScalarConverter() {}
+
+ScalarConverter::ScalarConverter(const ScalarConverter &) {}
+
+ScalarConverter &ScalarConverter::operator=(const ScalarConverter &) {
+    return *this;
+}
+
+ScalarConverter::~ScalarConverter() {}
+
 void ScalarConverter::convert(const std::string &literal) {
     if (literal.length() == 1 && !std::isdigit(literal[0])) {
         char c = literal[0];

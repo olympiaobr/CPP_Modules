@@ -20,14 +20,9 @@ public:
 private:
     std::map<std::string, float> priceData;
 
-    // Declare these functions
-    int parseDate(const std::string& line, const char delimiter);
-    float parseValue(const std::string& line, const char delimiter);
-
     void loadDatabase(std::ifstream &db);
     void evaluateQuery(const std::string &date, const std::string &valueStr);
     bool validateDateFormat(const std::string &date) const;
-    bool validateDate(const std::string &date) const;
     bool validateValue(const std::string &valueStr) const;
 };
 

@@ -1,34 +1,52 @@
 #ifndef PMERGEME_HPP
 #define PMERGEME_HPP
 
-#include <vector>
-#include <deque>
-#include <string>
 #include <iostream>
-#include <ctime>
+#include <vector>
+#include <list>
+#include <string>
+#include <sstream>
+#include <cstdlib>
 #include <sys/time.h>
 
 class PmergeMe {
 public:
+    // Constructors and Destructor
     PmergeMe();
     PmergeMe(const PmergeMe &other);
-    PmergeMe &operator=(const PmergeMe &other);
     ~PmergeMe();
 
-    void sortVector(std::vector<int> &vec);
-    void sortDeque(std::deque<int> &deq);
+    // Assignment Operator
+    PmergeMe &operator=(const PmergeMe &other);
 
-    void printSequence(const std::string &label, const std::vector<int> &sequence);
-    void printSequence(const std::string &label, const std::deque<int> &sequence);
-
-    double getElapsedTime(struct timeval start, struct timeval end) const;
+    // Member Functions
+    void handleInput(char **av);
+    void organizeVector();
+    void organizeList();
+    void showResults();
 
 private:
-    void mergeInsertSortVector(std::vector<int> &vec, int left, int right);
-    void mergeInsertSortDeque(std::deque<int> &deq, int left, int right);
+    // Member Variables
+    std::vector<int> _unsortedVector;
+    std::list<int> _unsortedList;
+    std::vector<int> _sortedVector;
+    std::list<int> _sortedList;
+    double _vectorElapsedTime;
+    double _listElapsedTime;
 
-    void mergeVector(std::vector<int> &vec, int left, int mid, int right);
-    void mergeDeque(std::deque<int> &deq, int left, int mid, int right);
+    // Utility Functions
+    int convertToInt(const std::string &str);
+    double computeElapsedTime(struct timeval &start, struct timeval &end);
+
+    // Ford-Johnson Sorting Functions
+    void fordJohnsonSort(const std::vector<int>& input, std::vector<int>& result);
+    void fordJohnsonSort(const std::list<int>& input, std::list<int>& result);
+
+    // Insertion Functions
+    void insertSorted(std::vector<int>& sortedSmaller, const std::vector<int>& sortedLarger);
+    void insertSorted(std::list<int>& sortedSmaller, const std::list<int>& sortedLarger);
 };
 
 #endif
+
+

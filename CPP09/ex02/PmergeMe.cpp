@@ -143,25 +143,29 @@ void PmergeMe::fordJohnsonSort(const std::list<int>& input, std::list<int>& resu
     insertSorted(result, sortedLarger); // Insert the larger elements in their correct positions
 }
 
+// Binary Search to find the position to insert element in a sorted vector
+std::vector<int>::iterator PmergeMe::binarySearch(std::vector<int>& sortedSmaller, int element) {
+    size_t left = 0;
+    size_t right = sortedSmaller.size();
+
+    while (left < right) {
+        size_t middle = (left + right) / 2;
+        if (sortedSmaller[middle] < element)
+            left = middle + 1;
+        else
+            right = middle;
+    }
+    return sortedSmaller.begin() + left;
+}
+
+
 // Insert elements from sortedLarger into sortedSmaller maintaining order (for vector)
 void PmergeMe::insertSorted(std::vector<int>& sortedSmaller, const std::vector<int>& sortedLarger) {
-    std::vector<int> result;
-    size_t i = 0, j = 0;
-
-    // Merge both sorted sequences
-    while (i < sortedSmaller.size() && j < sortedLarger.size()) {
-        if (sortedSmaller[i] <= sortedLarger[j]) {
-            result.push_back(sortedSmaller[i++]);
-        } else {
-            result.push_back(sortedLarger[j++]);
-        }
+    for (size_t i = 0; i < sortedLarger.size(); ++i) {
+        // Use binary search to find the correct position for each element from sortedLarger
+        std::vector<int>::iterator pos = binarySearch(sortedSmaller, sortedLarger[i]);
+        sortedSmaller.insert(pos, sortedLarger[i]);  // Insert at the correct position
     }
-
-    // Add any remaining elements from both sequences
-    while (i < sortedSmaller.size()) result.push_back(sortedSmaller[i++]);
-    while (j < sortedLarger.size()) result.push_back(sortedLarger[j++]);
-
-    sortedSmaller = result;
 }
 
 // Insert elements from sortedLarger into sortedSmaller maintaining order (for list)
@@ -200,3 +204,4 @@ void PmergeMe::showResults() {
     std::cout << "Time to process a range of " << _unsortedList.size() << " elements with std::list: "
               << std::fixed << std::setprecision(5) << _listElapsedTime << " us" << std::endl;
 }
+

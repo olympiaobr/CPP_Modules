@@ -24,9 +24,11 @@ private:
     void evaluateQuery(const std::string &date, const std::string &valueStr);
     bool validateDateFormat(const std::string &date) const;
     bool validateValue(const std::string &valueStr) const;
+    bool isLeapYear(int year) const;
 };
 
 #endif
+
 
 
 

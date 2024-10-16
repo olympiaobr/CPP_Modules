@@ -100,6 +100,18 @@ void BitcoinExchange::evaluateQuery(const std::string &date, const std::string &
         std::cerr << "Error: Date " << date << " is before available data." << std::endl;
     }
 }
+bool BitcoinExchange::isLeapYear(int year) const
+{
+    if (year % 4 == 0)
+    {
+        if (year % 100 == 0)
+        {
+            return year % 400 == 0;
+        }
+        return true;
+    }
+    return false;
+}
 
 bool BitcoinExchange::validateDateFormat(const std::string &date) const
 {
@@ -110,9 +122,34 @@ bool BitcoinExchange::validateDateFormat(const std::string &date) const
     int month = std::atoi(date.substr(5, 2).c_str());
     int day = std::atoi(date.substr(8, 2).c_str());
 
-    if (year < 2009 || month < 1 || month > 12 || day < 1 || day > 31)
+    if (year < 2009)
         return false;
 
+    if (month < 1 || month > 12)
+        return false;
+
+    if (month == 2)
+    {
+        if (isLeapYear(year))
+        {
+            if (day < 1 || day > 29)
+                return false;
+        }
+        else
+        {
+            if (day < 1 || day > 28)
+                return false;
+        }
+    }
+    else if (month == 4 || month == 6 || month == 9 || month == 11)
+    {
+        if (day < 1 || day > 30)
+            return false;
+    }
+    else {
+        if (day < 1 || day > 31)
+            return false;
+    }
     return true;
 }
 
@@ -123,7 +160,6 @@ bool BitcoinExchange::validateValue(const std::string &valueStr) const
         std::cerr << "Error: bad input format." << std::endl;
         return false;
     }
-
     float value = static_cast<float>(std::atof(valueStr.c_str()));
     if (value < 0)
     {
